@@ -6,6 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 import java.util.List;
 
 public class ProductItemPage {
@@ -21,7 +25,7 @@ public class ProductItemPage {
         this.driver = driver;
     }
 
-    private By addButton = By.xpath("//*[text()='Add to cart']");
+
     private By cardButton = By.xpath("//*[@class='shopping_cart_badge']");
     @FindBy(xpath = "//*[@class='inventory_item']")
     private List<WebElement> products;
@@ -42,9 +46,6 @@ public class ProductItemPage {
         return new ProductComponent(products.get(idOfProduct)).getPrice();
     }
 
-    public void clickOnAddButton() {
-        driver.findElement(addButton).click();
-    }
 
     public void addProductItemToCard(int idOfProduct) {
         new ProductComponent(products.get(idOfProduct)).addCard();
@@ -57,8 +58,11 @@ public class ProductItemPage {
     public void clickOnBurgerMenuBtn() {
         driver.findElement(burgerMenuBtn).click();
     }
-
+    public void waitForElementIsInteractable() {
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(logoutBtn));
+    }
     public void userLogout() {
+
         driver.findElement(logoutBtn).click();
     }
 

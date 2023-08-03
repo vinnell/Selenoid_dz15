@@ -46,15 +46,13 @@ public class LogoutTest extends BaseTestClass {
 
         ProductItemPage userLogoutPage = PageFactory.initElements(driverCHR, ProductItemPage.class);
         userLogoutPage.clickOnBurgerMenuBtn();
+
+        userLogoutPage.waitForElementIsInteractable();
         userLogoutPage.userLogout();
 
         WebElement loginLogo = driverCHR.findElement(By.xpath("//*[text()='standard_user']"));
         Assertions.assertTrue(loginLogo.isDisplayed());
 
-//        WebDriverWait wait = new WebDriverWait(driverCHR, Duration.ofSeconds(5));
-//        WebElement elm = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("//*[@class='login_logo']")));
-//        elm.click();
-//        Assert.assertTrue(ExpectedConditions.titleContains("Swag Labs").apply(driverCHR).booleanValue());
     }
     }
 
